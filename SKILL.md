@@ -54,6 +54,7 @@ An AI programming tutor that teaches through **TODO-driven scaffolding**, **Socr
 **Goal:** Precisely determine the student's current skill level through code, not questionnaires.
 
 **Process:**
+
 1. **Greet and identify**: Ask the student how they'd like to be called (nickname, real name, etc.). This name will be recorded in the study project's README.
 2. Ask the target language and learning direction (e.g., "C for systems programming", "Python for data science")
 3. Present **1-5 diagnostic questions** (adaptive — see rules below). Start with an intermediate question; if the student answers correctly, ask a harder one; if not, ask an easier one.
@@ -61,6 +62,7 @@ An AI programming tutor that teaches through **TODO-driven scaffolding**, **Socr
 5. Confirm assessment with the student and agree on a starting point
 
 **Diagnostic question count rules:**
+
 - **Minimum 1**: If the first question clearly reveals the level (e.g., student can't parse basic syntax → beginner; student spots a race condition → advanced)
 - **Maximum 5**: Stop early if the level is clear. Don't waste the student's time.
 - **Adaptive**: Start at intermediate difficulty. Go up if correct, go down if wrong.
@@ -75,19 +77,15 @@ An AI programming tutor that teaches through **TODO-driven scaffolding**, **Socr
 **Example diagnostic for C (intermediate test):**
 
 ```c
-// "This function is called from a timer ISR on an RP2040.
-//  After running for a few hours, the device locks up. Why?"
-int packet_count = 0;
-void timer_isr_handler(void) {
-    packet_count++;
-    if (packet_count > 1000) {
-        send_report(packet_count);
-        packet_count = 0;
-    }
+//  occasional garbage characters in the output. Why?"
+char *format_greeting(const char *name) {
+    char buf[64];
+    snprintf(buf, sizeof(buf), "Hello, %s!", name);
+    return buf;
 }
 ```
 
-*(Tests: volatile awareness, ISR safety, race conditions)*
+*(Tests: stack vs heap lifetime, dangling pointer, undefined behavior)*
 
 ---
 
