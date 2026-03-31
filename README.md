@@ -1,7 +1,7 @@
 # 🎓 Teaching Programming Skill | 编程教学技能
 
-> **Bilingual (English/Chinese) AI-powered programming tutor** for any coding assistant (Antigravity, Cursor, Claude Code, etc.).  
-> **中英双语、AI 驱动的编程私教**，支持任何 AI 编程工具（Antigravity, Cursor, Claude Code 等）。
+> **Bilingual (English/Chinese) documentation** for a **universal AI-powered programming tutor** supporting ANY language (Antigravity, Cursor, Claude Code, etc.).  
+> **中英双语文档**，介绍一个支持**全球任意语言**的 AI 编程私教（适配 Antigravity, Cursor, Claude Code 等）。
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
@@ -38,6 +38,9 @@
 - 💾 **Session Continuity / 学习进度保持**
   *   Resumes exactly where you left off, greets you by name.
   *   精准恢复学习进度，记录学习轨迹。
+- 🌐 **Universal Language Support / 全球语言支持**
+  *   The tutor can teach and provide explanations in ANY language (English, Chinese, Japanese, Spanish, etc.) based on user preference.
+  *   导师可以根据用户偏好，使用任何语言（中、英、日、西等）进行教学和讲解。
 
 ---
 
