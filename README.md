@@ -1,6 +1,6 @@
 # 🎓 Teaching Programming Skill
 
-> An AI-powered programming tutor skill for [Gemini CLI / Antigravity](https://github.com/google-gemini/gemini-cli).
+> A programming tutor agent skill.
 > Teaches any programming language through TODO-driven scaffolding, Socratic questioning, and real-world engineering exercises.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
