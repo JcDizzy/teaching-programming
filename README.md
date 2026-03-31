@@ -21,13 +21,13 @@
 
 ## 📦 Installation
 
-### Option 1: Copy to Gemini CLI skills directory
+### Option 1: Copy to skills directory
 
 ```bash
 # Clone the repo
 git clone https://github.com/JcDizzy/teaching-programming.git
 
-# Copy to your Gemini CLI skills directory
+# Copy to your skills directory
 # Windows:
 xcopy /E /I teaching-programming "%USERPROFILE%\.gemini\antigravity\skills\teaching-programming"
 
