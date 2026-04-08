@@ -1,6 +1,6 @@
 ﻿---
 name: teaching-programming
-description: Use when the user wants to learn, practice, review, or be tested on a programming language, or when they open or continue a study workspace with exercises and lesson files
+description: Use when the user wants to learn, practice, review, or be tested on a programming language, or says things like "teach me", "help me study", "I want to learn", "我想学", "教我", "带我学", "帮我学", "继续学习", "继续学", "复习", "考我", or when they open or continue a study workspace with exercises and lesson files
 ---
 
 # Teaching Programming Languages
