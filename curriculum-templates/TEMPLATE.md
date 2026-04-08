@@ -1,258 +1,495 @@
 # Curriculum Meta-Template
 
-When no pre-built curriculum exists for a target language, use this template to dynamically
-generate a comprehensive, structured learning path. This ensures consistent quality and
-coverage regardless of the programming language.
+Use this file when no language-specific curriculum already exists. Its purpose is to force the generated course to be broad, explicit, modular, and large enough to cover the target language seriously rather than producing a shallow crash course.
 
 ---
 
-## Step 1: Language Profile
+## Core Goal
+
+When generating a curriculum for any target language, the tutor should aim to cover the language's full practical learning surface as far as it is relevant to the student's direction.
+
+That means:
+
+- cover fundamentals thoroughly
+- cover the language's core paradigm deeply
+- cover tooling, debugging, testing, and project structure explicitly
+- cover the standard library and ecosystem, not just syntax
+- cover common traps, anti-patterns, and failure modes
+- cover advanced engineering usage when the language supports it
+
+The curriculum should default toward being expansive and detailed. Trim only when the student's direction clearly makes a topic out of scope.
+
+---
+
+## Step 1: Build A Language Profile
 
 Before generating modules, analyze the target language along these axes:
 
-| Axis | Question | Example (Java) | Example (Rust) |
-|------|----------|----------------|----------------|
-| **Paradigm** | OOP? Functional? Procedural? Multi? | OOP + Multi | Multi-paradigm, ownership-based |
-| **Type System** | Static/Dynamic? Strong/Weak? | Static, strong | Static, strong, affine types |
-| **Memory Model** | GC? Manual? Ownership? | Garbage collected | Ownership + borrowing |
-| **Runtime** | Compiled? Interpreted? VM? | JVM bytecode | Compiled (LLVM) |
-| **Ecosystem** | Build tool? Package manager? | Maven/Gradle, Maven Central | Cargo, crates.io |
-| **Primary Domain** | What is it mainly used for? | Enterprise, Android, backend | Systems, CLI, WebAssembly |
-| **Student's Direction** | What does the student want to build? | Android apps / Spring backend | CLI tools / embedded |
+| Axis | Questions to Answer |
+|------|---------------------|
+| Paradigm | Is it procedural, object-oriented, functional, concurrent, logic-based, multi-paradigm, data-oriented, or ownership-based? |
+| Type System | Static or dynamic? Strong or weak? Generic? Inferred? Gradually typed? |
+| Memory Model | Garbage collection, ownership, reference counting, manual allocation, arena-based, stack-heavy? |
+| Runtime Model | Native compiled, VM-based, interpreted, JIT, transpiled, REPL-first? |
+| Concurrency Model | Threads, async/await, actors, goroutines, message passing, green threads, event loop? |
+| Standard Tooling | Build tool, package manager, formatter, linter, test runner, debugger, profiler |
+| Ecosystem Norms | How are projects usually organized? What libraries are foundational? |
+| Interop Story | How does it interact with C, OS APIs, databases, browsers, JVM, JS, native libraries, etc.? |
+| Safety Model | Error handling, nullability, overflow behavior, panic/exception model, borrow model, UB model |
+| Student Direction | Backend, frontend, embedded, CLI, tooling, data, automation, systems, mobile, graphics, game dev, interview prep |
 
-This profile determines which modules get more depth and what kind of exercises to generate.
-
----
-
-## Step 2: Mandatory Module Categories
-
-Every language curriculum MUST cover these 8 categories, regardless of the language. The specific
-content within each category adapts to the language's paradigm and features.
-
-### Category A: Foundations
-*Always Module 01. No prerequisites.*
-
-Must cover:
-- [ ] Data types (primitives, type system, type inference if applicable)
-- [ ] Variables (mutability, naming conventions, scope rules)
-- [ ] Operators (arithmetic, logical, comparison, language-specific operators)
-- [ ] Control flow (conditionals, loops, pattern matching if applicable)
-- [ ] Basic I/O (printing, reading input)
-- [ ] Comments and documentation conventions
-
-**Adapt for language:**
-- Dynamic languages (Python, JS): emphasize type coercion traps
-- Static languages (Java, Rust, Go): emphasize type annotations and inference
-- Low-level languages (C, Rust): emphasize numeric overflow and bit-level representation
-
-### Category B: Data Structures & Collections
-*Prerequisites: A*
-
-Must cover:
-- [ ] Arrays / Lists / Vectors (the primary sequential container)
-- [ ] Strings (representation, manipulation, encoding)
-- [ ] Maps / Dictionaries / HashMaps
-- [ ] Sets
-- [ ] Iterators and iteration patterns
-- [ ] Choosing the right data structure
-
-**Adapt for language:**
-- Languages with generics (Java, Rust, C++): cover generic collections
-- Dynamic languages (Python, JS): cover duck typing with collections
-- Low-level (C): cover manual array management, `struct` arrays
-
-### Category C: Functions & Modularity
-*Prerequisites: B*
-
-Must cover:
-- [ ] Function definition, parameters, return values
-- [ ] Scope and lifetime rules
-- [ ] Higher-order functions (if the language supports them)
-- [ ] Closures / lambdas (if applicable)
-- [ ] Modules / packages / namespaces (code organization)
-- [ ] Import/export mechanisms
-
-**Adapt for language:**
-- Functional languages (Haskell, Elixir): closures and HOF are central, cover early
-- OOP languages (Java, C#): methods belong with classes (Category D)
-- C: header files, linkage, `static` vs `extern`
-
-### Category D: Language-Specific Core Paradigm
-*Prerequisites: C*
-
-This is the category that varies MOST by language. Cover the language's PRIMARY paradigm deeply.
-
-| Language Type | Core Paradigm Content |
-|--------------|----------------------|
-| **OOP** (Java, C#, Python) | Classes, inheritance, polymorphism, interfaces, abstract classes, encapsulation |
-| **Ownership** (Rust) | Ownership, borrowing, lifetimes, the borrow checker, `Clone` vs `Copy` |
-| **Functional** (Haskell, Elixir) | Pure functions, immutability, monads/pattern matching, recursion |
-| **Procedural** (C) | Pointers, memory management, structs, function pointers |
-| **Prototype** (JavaScript) | Prototypes, `this` binding, closures, async/await |
-| **Concurrent** (Go) | Goroutines, channels, select, sync primitives |
-
-**This is typically the LARGEST module (or 2-3 modules) in any curriculum.**
-
-### Category E: Error Handling & Robustness
-*Prerequisites: D*
-
-Must cover:
-- [ ] Error handling mechanism (exceptions, Result types, error codes)
-- [ ] Defensive programming patterns
-- [ ] Input validation
-- [ ] Logging and debugging techniques
-- [ ] Language-specific safety features
-
-**Adapt for language:**
-- Java/Python: try-catch-finally, custom exceptions, exception hierarchies
-- Rust: `Result<T, E>`, `Option<T>`, `?` operator, `unwrap` dangers
-- Go: multiple return values, `error` interface, `defer`
-- C: return codes, `errno`, goto-cleanup pattern
-
-### Category F: Project Structure & Build System
-*Prerequisites: E*
-
-Must cover:
-- [ ] Project directory conventions
-- [ ] Build tool usage (compilation, dependencies, tasks)
-- [ ] Dependency management
-- [ ] Testing frameworks and test organization
-- [ ] Debug vs release configurations
-
-**Adapt for language:**
-- Java: Maven/Gradle, `src/main/java`, JUnit
-- Rust: Cargo, `src/`, `tests/`, `cargo test`
-- Python: pip/poetry, `__init__.py`, pytest
-- C: CMake/Make, header organization, Unity/CUnit
-- JavaScript: npm/pnpm, `package.json`, Jest/Vitest
-
-### Category G: Standard Library & Ecosystem
-*Prerequisites: F*
-
-Must cover:
-- [ ] File I/O
-- [ ] String processing (regex, formatting, parsing)
-- [ ] Date/time handling
-- [ ] Networking basics (HTTP, sockets — at appropriate level)
-- [ ] JSON/XML/data serialization
-- [ ] Key third-party libraries for the student's direction
-
-**Adapt for student's direction:**
-- If embedded: hardware I/O, serial, register manipulation
-- If web: HTTP frameworks, routing, middleware
-- If data science: data manipulation libraries, plotting
-- If CLI: argument parsing, terminal formatting
-
-### Category H: Advanced Topics & Architecture
-*Prerequisites: G*
-
-Must cover:
-- [ ] Concurrency / parallelism (language-specific model)
-- [ ] Design patterns relevant to the language
-- [ ] Performance optimization techniques
-- [ ] Testing strategies (unit, integration, mocking)
-- [ ] Common anti-patterns and pitfalls
-
-**Plus domain-specific advanced topics based on student's direction.**
+This profile controls which modules get extra depth, which examples to prefer, and which advanced topics are mandatory.
 
 ---
 
-## Step 3: Module Generation Rules
+## Step 2: Coverage Contract
 
-1. **Number of modules**: 8-12 total (map categories to modules, split large categories)
-2. **Naming**: `NN_descriptive_name/` (e.g., `01_foundations/`, `05_error_handling/`)
-3. **Each module MUST have**:
-   - 3-6 concept exercises (scaffolded, TODO-based)
-   - 1 micro-project (integrates 3+ concepts from the module)
-   - Clear prerequisites listed
-   - Estimated time (hours)
-4. **Exercise naming**: `ex_M_N_topic.{ext}` (M=module, N=exercise, ext=language extension)
-5. **Progressive scaffolding**:
-   - Modules 01-03: 80-90% code provided (beginner)
-   - Modules 04-06: 50-70% code provided (intermediate)
-   - Modules 07+: 30-40% code provided (advanced)
+Every generated curriculum MUST attempt to cover the following topic families unless a family is genuinely not applicable to the language.
 
-## Step 4: Exercise Topic Selection
+### Family A: Syntax And Surface Fundamentals
 
-When choosing exercise topics, follow this priority:
+Must consider:
 
-1. **Student's actual domain first** — What are they going to build? Use scenarios from that domain.
-2. **Universal engineering patterns** — File parsing, data validation, state machines, protocol handling.
-3. **Interview-style problems** — ONLY if the student's goal is interview prep. Otherwise, avoid.
+- lexical structure, tokens, identifiers
+- literals and primitive values
+- variables and mutability
+- operators and precedence
+- expressions and statements
+- comments and documentation style
+- formatting conventions
 
-**NEVER use** (Iron Law #4):
-- Pure math puzzles (FizzBuzz, Fibonacci) unless illustrating recursion
-- "Print a pattern" exercises
-- Contrived scenarios with no real-world application
-- Tutorial clichés ("TodoList app" for web, "Calculator" for desktop)
+### Family B: Type System And Value Semantics
 
-**ALWAYS prefer**:
-- Building blocks the student will reuse (parsers, validators, state machines)
-- Exercises that connect to the student's hardware/platform (if embedded)
-- Problems that expose language-specific traps (memory leaks, race conditions, type coercion)
+Must consider:
+
+- primitive and composite types
+- type inference and annotations
+- coercion / conversion rules
+- references, pointers, objects, values, or bindings
+- equality, identity, comparison semantics
+- nullability / optionality model
+- generic / polymorphic type features where applicable
+
+### Family C: Control Flow And Execution
+
+Must consider:
+
+- branching
+- loops / iteration
+- pattern matching if applicable
+- recursion
+- short-circuit behavior
+- evaluation order traps
+- scoping and lifetime basics
+
+### Family D: Data Structures And Collections
+
+Must consider:
+
+- sequential collections
+- associative collections
+- sets
+- strings and text encoding
+- iterators / generators / traversals
+- choosing data structures intentionally
+
+### Family E: Functions, Abstractions, And Modularization
+
+Must consider:
+
+- function definition and calls
+- parameters and return values
+- higher-order functions / callbacks if applicable
+- closures / lambdas if applicable
+- modules, packages, namespaces, files
+- import / export rules
+- API boundary design
+
+### Family F: Core Language Paradigm
+
+This family must be one of the largest parts of the curriculum. It should deeply cover the language's defining ideas, for example:
+
+- classes, objects, inheritance, interfaces
+- ownership, borrowing, lifetimes
+- closures, purity, immutability, algebraic data types
+- pointers, structs, unions, function pointers
+- prototypes, event loop, async model
+- goroutines, channels, actor systems
+
+### Family G: Error Handling, Safety, And Robustness
+
+Must consider:
+
+- error signaling model
+- defensive programming
+- input validation
+- logging and observability basics
+- language-specific safety guarantees and failure modes
+- common traps and anti-patterns
+
+### Family H: Build, Tooling, And Project Structure
+
+Must consider:
+
+- project layout
+- build / package tools
+- dependency management
+- formatter / linter
+- testing toolchain
+- debug vs release workflow
+- environment and configuration handling
+
+### Family I: Standard Library And Everyday I/O
+
+Must consider:
+
+- file I/O
+- parsing and formatting
+- string processing
+- date / time
+- serialization formats
+- networking basics when relevant
+- process or system interaction when relevant
+
+### Family J: Debugging, Testing, And Quality Practices
+
+Must consider:
+
+- unit tests
+- integration tests
+- debugging workflow
+- assertions
+- mocking / test doubles where relevant
+- diagnosing runtime failures
+- regression thinking
+
+### Family K: Performance, Concurrency, And Systems Concerns
+
+Must consider when applicable:
+
+- concurrency model
+- synchronization / coordination
+- async execution
+- memory behavior
+- performance profiling
+- algorithmic complexity
+- optimization trade-offs
+
+### Family L: Architecture, Ecosystem, And Domain Practice
+
+Must consider:
+
+- idiomatic project architecture
+- reusable patterns
+- common library choices
+- domain-specific frameworks
+- deployment/runtime concerns where relevant
+- common mistakes seen in real projects
+
+If a topic family is not applicable, the generated curriculum should explicitly say why instead of silently omitting it.
 
 ---
 
-## Step 5: Diagnostic Question Generation
+## Step 3: Module Planning Rules
 
-For Phase 1 Assessment, generate 3 diagnostic questions at increasing difficulty:
+The curriculum should usually contain 10 to 18 modules. Large, feature-rich, multi-paradigm languages may need more. Very small languages may need fewer, but should still preserve broad category coverage.
 
-### Beginner Diagnostic
-- Tests: basic syntax knowledge + one common trap
-- Format: "What does this code print?" with a subtle type/scope issue
-- If student gets this wrong → start from Module 01
+### Module Count Guidance
 
-### Intermediate Diagnostic
-- Tests: understanding of the core paradigm (Category D)
-- Format: "This code has a bug that only manifests after X minutes/iterations. What is it?"
-- If student gets this wrong → start from Module 03-04
+- Minimal serious curriculum: 10 modules
+- Normal comprehensive curriculum: 12 to 16 modules
+- Rich ecosystem / multi-domain curriculum: 16 to 20 modules
 
-### Advanced Diagnostic
-- Tests: architecture thinking + concurrency/performance awareness
-- Format: "This system design will fail under load. Why? How would you fix it?"
-- If student gets this right → start from Module 07+
+### Module Naming
+
+Use `NN_descriptive_name/`, for example:
+
+- `01_foundations/`
+- `02_types_and_values/`
+- `03_collections/`
+- `04_functions_and_modules/`
+
+### Every Module Must Include
+
+- purpose / learning outcome
+- prerequisite modules
+- estimated time
+- core knowledge points
+- likely bug patterns / traps
+- 4 to 8 exercises
+- 1 micro-project or strong integrative challenge
+
+### Exercise Volume Guidance
+
+Prefer more exercises over fewer:
+
+- early modules: 5 to 8 smaller exercises
+- middle modules: 4 to 7 exercises
+- advanced modules: 3 to 6 harder exercises
+- each module: 1 micro-project or capstone-like integrative task
+
+### Scaffolding Guidance
+
+- beginner-heavy modules: 70 to 90 percent of structure provided
+- intermediate modules: 40 to 70 percent of structure provided
+- advanced modules: 20 to 50 percent of structure provided
+- micro-projects: requirements first, implementation more student-owned
+
+### Lesson File Volume
+
+The curriculum should not artificially compress content. A module may contain:
+
+- multiple code exercises
+- multiple review exercises
+- multiple note files
+- helper files
+- mini-project folders
 
 ---
 
-## Step 6: Micro-Project Design
+## Step 4: Knowledge Map Expansion Rules
 
-Each micro-project MUST:
+For each generated module, list knowledge points at two levels:
 
-1. **Integrate 3+ concepts** from the current and previous modules
-2. **Produce a usable deliverable** (not throwaway code)
-3. **Match the student's direction** (embedded → firmware component, web → API endpoint, etc.)
-4. **Have automated acceptance tests** + clear pass/fail criteria
-5. **Be significantly harder** than individual exercises (stretch goal)
+1. **Primary concepts**
+2. **Subtopics / traps / practical details**
 
-**Micro-project sizing guide:**
-| Module Range | Complexity | Estimated Time |
-|-------------|-----------|----------------|
-| 01-03 | Single-file, focused utility | 1-2 hours |
-| 04-06 | Multi-function, data + logic | 2-4 hours |
-| 07-09 | Multi-file, architecture required | 4-6 hours |
-| 10+ (capstone) | Complete mini-system | 6-10 hours |
+Bad:
+
+- "Functions"
+
+Good:
+
+- Function declaration vs definition
+- Parameter passing model
+- Default mutability assumptions
+- Variadic support if any
+- Named / positional / keyword arguments if any
+- Stack behavior / call overhead if relevant
+- Common mistakes with argument ownership / aliasing / capture
+
+This prevents vague, under-detailed curricula.
 
 ---
 
-## Example: Generating a Java Curriculum
+## Step 5: Diagnostic Question Rules
 
-**Student profile:** "I want to learn Java for Android development"
+Phase 1 diagnostics must match the current teaching workflow.
 
-**Generated modules:**
+### Required Rule
+
+Generate **3 to 5 diagnostics**, and ask them **from hard to easy**.
+
+The default sequence is:
+
+1. advanced diagnostic
+2. intermediate diagnostic
+3. beginner diagnostic
+
+Add a 4th or 5th question only if the level is still ambiguous.
+
+### Diagnostic Coverage Rules
+
+Across the full set of 3 to 5 questions, cover multiple axes such as:
+
+- syntax or semantics
+- language core paradigm
+- runtime / memory / safety model
+- debugging ability
+- architecture or performance awareness
+
+### Diagnostic Design Rules
+
+- Questions should be code-based or scenario-based.
+- Do not ask only self-report questions.
+- Prefer realistic bug or design scenarios.
+- The first question should be the hardest reasonable question for the language and direction.
+- Only stop before 5 if the student level is unmistakably clear after at least 3 prompts.
+
+### Diagnostic Outcome Mapping
+
+- Fails hard question, handles medium question: likely intermediate
+- Fails medium and beginner question: likely beginner
+- Handles hard question with good explanation: likely advanced
+- Mixed answers: ask 1 to 2 tie-breaker questions
+
+### Diagnostic Question Formats
+
+Prefer:
+
+- "What is the bug and why does it happen?"
+- "What happens when this code runs?"
+- "Why will this design fail under load / at scale / after repetition?"
+- "How would you make this safer / more idiomatic?"
+
+Avoid:
+
+- trivia-only questions
+- toy puzzles with no engineering relevance
+- definitions copied from textbooks
+
+---
+
+## Step 6: Exercise Topic Selection
+
+Choose exercise themes using this priority:
+
+1. student's real target domain
+2. reusable engineering building blocks
+3. language-specific traps and idioms
+4. interview-style problems only when interview prep is the actual goal
+
+### Strong Exercise Themes
+
+- parsers
+- validators
+- state machines
+- schedulers
+- command dispatchers
+- file transformers
+- configuration handling
+- protocol handling
+- async orchestration
+- memory-safe wrappers
+- serialization / deserialization
+- concurrency-safe data flow
+
+### Weak Exercise Themes
+
+- pattern printing
+- filler arithmetic drills
+- puzzles disconnected from the target language's real strengths
+- shallow "hello world but renamed"
+
+---
+
+## Step 7: Micro-Project Rules
+
+Each module-level micro-project must:
+
+- integrate at least 3 concepts from current and prior modules
+- produce something plausibly reusable
+- fit the student's target direction when possible
+- have concrete verification criteria
+- be meaningfully harder than a normal exercise
+
+### Micro-Project Sizing
+
+| Stage | Typical Scope | Suggested Time |
+|-------|---------------|----------------|
+| Early | single-file utility or parser | 1 to 2 hours |
+| Middle | multi-function component | 2 to 4 hours |
+| Late | multi-file subsystem | 4 to 8 hours |
+| Final | capstone or mini-system | 6 to 12+ hours |
+
+---
+
+## Step 8: Domain Adaptation Rules
+
+Once the general curriculum is generated, bias examples and projects toward the student's direction:
+
+### Embedded / Systems
+
+- memory layout
+- bit manipulation
+- register or hardware abstractions
+- buffers
+- timing
+- low-level debugging
+
+### Web / Backend
+
+- request handling
+- serialization
+- error boundaries
+- concurrency / async
+- persistence
+- modular service structure
+
+### CLI / Tooling
+
+- argument parsing
+- file operations
+- terminal output
+- config files
+- logging
+- packaging
+
+### Data / Automation
+
+- file parsing
+- transformation pipelines
+- structured data formats
+- scripting ergonomics
+- library ecosystems
+
+### Mobile / UI
+
+- state management
+- lifecycle / event model
+- async data flow
+- architecture boundaries
+
+---
+
+## Step 9: Output Requirements For The Generated Curriculum
+
+The generated curriculum should be explicit enough that a future tutoring session can create the workspace without improvising structure.
+
+The curriculum output should include:
+
+- module list
+- lesson list per module
+- detailed knowledge points per module
+- example exercise topics
+- micro-project ideas
+- prerequisites
+- estimated time
+- review suggestions for likely weak areas
+
+The first generated `README.md` plan should feel substantial, not skeletal.
+
+---
+
+## Example Module Skeleton
+
+```markdown
+## Module 04: Functions And Modules
+Prerequisites: Modules 01-03
+Estimated time: 8-12 hours
+
+Core knowledge points:
+- Function declaration vs definition
+- Parameter passing semantics
+- Closures / callbacks / lambdas if applicable
+- Scope boundaries
+- Module organization
+- Import/export rules
+- API design basics
+
+Common traps:
+- Accidental shared state
+- Wrong ownership or lifetime assumptions
+- Circular imports
+- Leaky abstractions
+
+Exercises:
+- ex_4_1_callback_pipeline
+- ex_4_2_module_boundary_refactor
+- ex_4_3_safe_formatter
+- ex_4_4_config_loader
+- review_4_1_scope_and_lifetime
+
+Micro-project:
+- Build a reusable config parsing module with validation and tests
 ```
-01_foundations/        — Types, operators, control flow (Java-specific: autoboxing traps)
-02_collections/        — ArrayList, HashMap, iterators, Stream API basics
-03_oop_fundamentals/   — Classes, constructors, inheritance, toString/equals/hashCode
-04_oop_advanced/       — Interfaces, abstract classes, polymorphism, design patterns
-05_error_handling/     — Exceptions hierarchy, try-with-resources, custom exceptions
-06_generics_lambdas/   — Generics, wildcards, functional interfaces, lambda expressions
-07_project_structure/  — Gradle, JUnit, project layout, dependency management
-08_concurrency/        — Threads, ExecutorService, synchronized, volatile, CompletableFuture
-09_android_basics/     — Activity lifecycle, Views, Intents, RecyclerView (domain-specific)
-10_android_advanced/   — Room database, ViewModel, LiveData, coroutines (domain-specific)
-```
 
-**Diagnostic questions:**
-- Beginner: "What prints?" — `Integer a = 128; Integer b = 128; System.out.println(a == b);` (tests autoboxing cache)
-- Intermediate: "This code leaks memory in an Android app. Why?" — (tests Activity lifecycle + listener registration)
-- Advanced: "This network request crashes the app. Why?" — (tests main thread + coroutine understanding)
+---
+
+## Final Standard
+
+If the generated curriculum looks like a short tutorial outline, it is too small.
+
+If it skips tooling, debugging, testing, or common pitfalls, it is incomplete.
+
+If it only teaches syntax and never reaches real engineering tasks, it has failed the purpose of this skill.
