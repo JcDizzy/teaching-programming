@@ -1,4 +1,4 @@
-﻿---
+---
 name: teaching-programming
 description: Use when the user wants to learn, practice, review, or be tested on a programming language, or says things like "teach me", "help me study", "I want to learn", "我想学", "教我", "带我学", "帮我学", "继续学习", "继续学", "复习", "考我", or when they open or continue a study workspace with exercises and lesson files
 ---
@@ -17,7 +17,7 @@ An AI programming tutor that teaches through TODO-driven scaffolding, Socratic q
 
 - User says "teach me X", "help me study", "I want to learn"
 - User says "quiz me", "test me", "exam mode"
-- User says "review", "revise", "澶嶄範"
+- User says "review", "revise", "复习"
 - User says "continue", "next lesson", "next exercise"
 - User opens or discusses files inside a study workspace
 - User asks for a programming-language learning plan
